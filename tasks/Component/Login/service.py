@@ -148,6 +148,13 @@ class LoginService(
                 if self.click(self.C_LOGIN_ANIMATION_CENTER, interval=5):  # 点击屏幕中央触发跳过显示
                     skip_click_mx_cnt -= 1
 
+            # 新版登录界面的"进入游戏"是书法美术字，PP-OCR 读不出来（O_LOGIN_ENTER_GAME 一直返回空），
+            # 这里改用模板匹配点按钮；该素材取自登录界面实拍，跨帧匹配 0.97 以上
+            if self.appear_then_click(self.I_LOGIN_ENTER_GAME_BTN, interval=3):
+                skip_login_animation = False  # 进入登录页面后不再处理登录动画逻辑
+                self.wait_until_appear(self.I_LOGIN_SPECIFIC_SERVE, True, wait_time=5)
+                continue
+
             if self.ocr_appear_click(self.O_LOGIN_ENTER_GAME, interval=3):
                 skip_login_animation = False  # 进入登录页面后不再处理登录动画逻辑
                 self.wait_until_appear(self.I_LOGIN_SPECIFIC_SERVE, True, wait_time=5)
