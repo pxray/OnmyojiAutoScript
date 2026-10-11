@@ -54,13 +54,13 @@
     "description": "description"
   },
   {
-    "itemName": "sou_switch_sure",
-    "imageName": "ss_sou_switch_sure.png",
-    "roiFront": "668,401,180,61",
-    "roiBack": "668,401,180,61",
+    "itemName": "audio_pack_cancel",
+    "imageName": "ss_audio_pack_cancel.png",
+    "roiFront": "399,481,174,57",
+    "roiBack": "385,465,215,95",
     "method": "Template matching",
     "threshold": 0.8,
-    "description": "description"
+    "description": "式神音频扩展包下载弹窗-取消"
   },
   {
     "itemName": "sou_check_in",
