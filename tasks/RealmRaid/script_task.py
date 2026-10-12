@@ -112,17 +112,15 @@ class ScriptTask(GeneralBattle, GameUi, SwitchSoul, RealmRaidAssets):
                     if not self.fire(index):
                         # 没有成功进入战斗则重新检查票数和其他条件
                         continue
-                    re_enter = True
-                    for _ in range(4):
-                        self.run_general_battle(config=self.build_quick_exit_config(con.general_battle_config))
-                        if not self.fire_again(index):
-                            # 取消后没能重新进入战斗，就不再往下打
-                            re_enter = False
-                            break
-                    if re_enter:
-                        last_battle = self.run_general_battle(con.general_battle_config)
-                    else:
-                        last_battle = False
+                    self.run_general_battle(config=self.build_quick_exit_config(con.general_battle_config))
+                    self.fire_again()
+                    self.run_general_battle(config=self.build_quick_exit_config(con.general_battle_config))
+                    self.fire_again()
+                    self.run_general_battle(config=self.build_quick_exit_config(con.general_battle_config))
+                    self.fire_again()
+                    self.run_general_battle(config=self.build_quick_exit_config(con.general_battle_config))
+                    self.fire_again()
+                    last_battle = self.run_general_battle(con.general_battle_config)
                     handled_first_target = True
             elif self.check_medal_is_frog(frog, medal, index):
                 # 如果挑战的这只是呱太的话，就要把锁定改为不锁定
@@ -457,48 +455,15 @@ class ScriptTask(GeneralBattle, GameUi, SwitchSoul, RealmRaidAssets):
         logger.info(f'Click fire {order} success')
         return False
 
-    def back_to_raid_page(self) -> bool:
-        """
-        失败结算页点「点击屏幕继续」退回结界突破列表
-        :return: 是否回到突破列表
-        """
-        for _ in range(6):
-            self.screenshot()
-            if self.appear(self.I_BACK_RED) and self.appear(self.I_RR_PERSON):
-                return True
-            if self.click(self.C_RR_CLICK_CONTINUE, interval=1.2):
-                continue
-        self.screenshot()
-        if self.appear(self.I_BACK_RED) and self.appear(self.I_RR_PERSON):
-            return True
-        logger.warning('Back to realm raid page failed')
-        return False
-
-    def fire_again(self, order: int) -> bool:
+    def fire_again(self) -> bool:
         """
         失败界面再次挑战
-        失败结算页会弹「是否再次挑战？」把整页盖住，直接点「再次挑战」是点不到的，
-        所以这里一律点取消，退回结算页和重新进攻都由脚本自己控制，不借用游戏自带的再战。
-        :param order:  第几个
-        :return: 是否重新进入战斗
+        :return: 是否再战成功
         """
         self.wait_until_appear(self.I_FIRE_AGAIN)
         while True:
             self.screenshot()
             if self.appear(self.I_EXIT):
-                logger.info(f'Click fire again success')
-                return True
-            # 「是否再次挑战？」确认框：取消，然后自己重新点进攻
-            if self.appear_then_click(self.I_UI_CANCEL, interval=2):
-                logger.info('Retry confirm dialog appeared, click cancel')
-                if not self.back_to_raid_page():
-                    return False
-                if not self.fire(order):
-                    logger.warning(f'Re-fire {order} failed')
-                    return False
-                if not self.wait_until_appear(self.I_EXIT, wait_time=30):
-                    logger.warning('Not back in battle after re-fire')
-                    return False
                 logger.info(f'Click fire again success')
                 return True
             if self.appear_then_click(self.I_SHOW_AGAIN, interval=2):
