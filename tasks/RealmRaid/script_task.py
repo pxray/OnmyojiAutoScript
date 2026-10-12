@@ -468,7 +468,8 @@ class ScriptTask(GeneralBattle, GameUi, SwitchSoul, RealmRaidAssets):
                 return True
             if self.appear_then_click(self.I_SHOW_AGAIN, interval=2):
                 continue
-            if self.appear_then_click(self.I_FRESH_ENSURE, interval=2):
+            # 2026-10 游戏更新后旧「再战确认」素材失效（实测 0.0469），改用通用确认按钮（实测 0.9976）
+            if self.appear_then_click(self.I_UI_CONFIRM, interval=2):
                 continue
             if self.appear_then_click(self.I_FIRE_AGAIN, interval=2):
                 continue
