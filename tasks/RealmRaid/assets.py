@@ -114,5 +114,7 @@ class RealmRaidAssets:
 	C_PARTITION_8 = RuleClick(roi_front=(567,413,230,124), roi_back=(567,413,230,124), name="partition_8")
 	# 用来分割不同的挑战位置 
 	C_PARTITION_9 = RuleClick(roi_front=(900,418,222,116), roi_back=(900,418,222,116), name="partition_9")
+	# 失败结算页的「点击屏幕继续」 
+	C_RR_CLICK_CONTINUE = RuleClick(roi_front=(560,672,170,34), roi_back=(520,660,250,58), name="rr_click_continue")
 
 
