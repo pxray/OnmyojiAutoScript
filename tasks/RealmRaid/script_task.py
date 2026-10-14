@@ -423,15 +423,16 @@ class ScriptTask(GeneralBattle, GameUi, SwitchSoul, RealmRaidAssets):
             return False
         while 1:
             self.screenshot()
-            if self.appear(self.I_FRESH_ENSURE):
+            # 2026-10 游戏更新后旧「刷新确认」素材失效（实测 0.0469），改用通用确认按钮（实测 0.9976）
+            if self.appear(self.I_UI_CONFIRM):
                 break
             if self.appear_then_click(self.I_FRESH, interval=1):
                 continue
         while 1:
             self.screenshot()
-            if not self.appear(self.I_FRESH_ENSURE):
+            if not self.appear(self.I_UI_CONFIRM):
                 return True
-            if self.appear_then_click(self.I_FRESH_ENSURE, interval=1):
+            if self.appear_then_click(self.I_UI_CONFIRM, interval=1):
                 continue
         return False
 
