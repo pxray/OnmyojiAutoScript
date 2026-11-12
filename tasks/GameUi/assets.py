@@ -161,8 +161,8 @@ class GameUiAssets:
 	I_CHECK_FRIENDS = RuleImage(roi_front=(74,628,58,66), roi_back=(74,628,58,66), threshold=0.8, method="Template matching", file="./tasks/GameUi/page/page_check_friends.png")
 	# 花合战页面标志 
 	I_CHECK_DAILY = RuleImage(roi_front=(28,515,58,62), roi_back=(1,487,154,145), threshold=0.8, method="Template matching", file="./tasks/GameUi/page/page_check_daily.png")
-	# 商店页面标志 
-	I_CHECK_MALL = RuleImage(roi_front=(231,455,131,78), roi_back=(201,432,185,121), threshold=0.8, method="Template matching", file="./tasks/GameUi/page/page_check_mall.png")
+	# 商店页面标志（2026-11 商城换景后旧屋顶布幌被NPC遮挡，改用礼包屋幌子） 
+	I_CHECK_MALL = RuleImage(roi_front=(750,340,40,95), roi_back=(720,315,100,145), threshold=0.8, method="Template matching", file="./tasks/GameUi/page/page_check_mall.png")
 	# 商店推荐页面标志 
 	I_CHECK_MALL_RECOMMEND = RuleImage(roi_front=(930,12,42,37), roi_back=(905,0,100,100), threshold=0.8, method="Template matching", file="./tasks/GameUi/page/page_check_mall_recommend.png")
 	# 阴阳寮页面标志 

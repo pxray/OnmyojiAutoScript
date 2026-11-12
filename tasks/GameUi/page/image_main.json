@@ -164,11 +164,11 @@
   {
     "itemName": "check_mall",
     "imageName": "page_check_mall.png",
-    "roiFront": "231,455,131,78",
-    "roiBack": "201,432,185,121",
+    "roiFront": "750,340,40,95",
+    "roiBack": "720,315,100,145",
     "method": "Template matching",
     "threshold": 0.8,
-    "description": "商店页面标志"
+    "description": "商店页面标志（2026-11 商城换景后旧屋顶布幌被NPC遮挡，改用礼包屋幌子）"
   },
   {
     "itemName": "check_mall_recommend",
