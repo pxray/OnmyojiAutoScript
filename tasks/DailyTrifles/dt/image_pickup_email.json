@@ -38,11 +38,11 @@
   {
     "itemName": "harvest_mail_confirm",
     "imageName": "dt_harvest_mail_confirm.png",
-    "roiFront": "687,543,168,64",
-    "roiBack": "687,543,168,64",
+    "roiFront": "675,546,175,57",
+    "roiBack": "645,521,235,107",
     "method": "Template matching",
     "threshold": 0.8,
-    "description": "确认收取邮件"
+    "description": "确认收取邮件（2026-10界面改版后旧蓝色确定素材失效，改用全部领取弹窗实拍金色确定；原roiBack与roiFront相同无搜索容差）"
   },
   {
     "itemName": "dt_harvest_mail_copy2",
