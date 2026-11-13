@@ -38,6 +38,15 @@ class LoginService(
         login_success = False
 
         while 1:
+            # 每次点击都会走 stuck_record_clear()（module/device/device.py:194-195），
+            # 把开头 stuck_record_add('LOGIN_CHECK') 换来的 300 秒长等待豁免清掉，
+            # 于是最后一次点击后只剩 stuck_timer 的 60 秒。2026-11-07 与 2026-11-13 的
+            # oas2 都是「Login success 之后 60.0 秒 Wait too long / Waiting for set()」→ Login failed。
+            # 这里静默补回豁免（不调 stuck_record_add，避免每圈刷一行日志），
+            # 全局 stuck 机制不动；代价是真卡死时报错从 60 秒延后到 300 秒。
+            if 'LOGIN_CHECK' not in self.device.detect_record:
+                self.device.detect_record.add('LOGIN_CHECK')
+
             if not login_success and orientation_timer.reached():
                 self.device.get_orientation()
                 orientation_timer.reset()
